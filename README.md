@@ -13,8 +13,8 @@
 
 To get a local copy up and running follow these simple example steps.
 1) Enter `git clone git@github.com:roshan-bajgain/gunaso_app.git` into terminal
-2) `npm install`
-3) `npm run dev`
+2) To install dependencies `npm install`
+3) To run app `npm run dev`
 
 
 ### Prerequisites
