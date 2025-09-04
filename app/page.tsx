@@ -1,6 +1,5 @@
 "use client";
-import { Button, TextArea, TextInput } from "@carbon/react";
-import { use } from "react";
+import { Button, TextArea, TextInput, Tile } from "@carbon/react";
 
 export default function Home() {
   return (
@@ -9,8 +8,20 @@ export default function Home() {
       <p>Welcome Text</p>
       <p>गुनासो सजिलै दर्ता र ट्र्याक गर्नुहोस्</p>
       <div>
-        <Button className="btn" kind="primary">Submit Grivance</Button>
-        <Button className="btn" kind="secondary">My Grievance</Button>
+        <Button className="btn" kind="primary">
+          Submit Grivance
+        </Button>
+        <Button className="btn" kind="secondary">
+          My Grievance
+        </Button>
+      </div>
+      <div className="grid grid-cols-4 gap-4">
+        <Tile className="box text-center font-semibold">
+          500+ Gunaso submitted
+        </Tile>
+        <Tile className="box text-centerfont-semibold">300+ Resolved</Tile>
+        <Tile className="box text-center font-semibold">100 Pending</Tile>
+        <Tile className="box text-center font-semibold">20 Escalated</Tile>
       </div>
     </main>
   );
