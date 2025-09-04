@@ -44,9 +44,20 @@ body {
 .box {
   background-color: #D9D9D9;
   color: #000000;
-  border: 2px solid #000000;
+  border: 2px solid #D9D9D9;
   padding: 20px;
-  text-align: center;
   border-radius: 8px;
   margin: 4px;
+}
+.container {
+  background-color: #D9D9D9;
+  border: 2px solid #D9D9D9;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.box-container {
+  position: relative;
+  top: 100px;
 }
