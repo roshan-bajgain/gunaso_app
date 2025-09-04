@@ -1,4 +1,10 @@
 @import "tailwindcss";
+@use '@carbon/react/scss/reset';
+@use '@carbon/react/theme';
+
+@use '@carbon/react/scss/theme' with(
+  $theme: themes.$g10
+);
 
 :root {
   --background: #ffffff;
