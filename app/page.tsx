@@ -1,10 +1,11 @@
 "use client";
 import { Button, TextArea, TextInput, Tile } from "@carbon/react";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <main>
-      <h1>Citizen Dashboard</h1>
+      <h1 className="heading">Citizen Dashboard</h1>
       <div className="container">
         <p>Welcome Text</p>
         <p>गुनासो सजिलै दर्ता र ट्र्याक गर्नुहोस्</p>
@@ -26,6 +27,20 @@ export default function Home() {
         <Tile className="box text-center font-semibold">100 Pending</Tile>
         <Tile className="box text-center font-semibold">20 Escalated</Tile>
       </div>
+      <footer className="footer">
+        <Link className="link" href="/">
+          Home
+        </Link>
+        <Link className="link" href="/my-grievances">
+          My Grievances
+        </Link>
+        <Link className="link" href="/submit-grievances">
+          Submit Grievances
+        </Link>
+        <Link className="link" href="/notifications">
+          Notification
+        </Link>
+      </footer>
     </main>
   );
 }
