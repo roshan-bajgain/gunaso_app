@@ -1,16 +1,63 @@
 "use client";
 import { Button, TextArea, TextInput, Tile } from "@carbon/react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Toggle from "@/components/toggle";
+import { useTranslations } from "next-intl";
+import router from "next/router";
 
 export default function Home() {
+  const [locale, setLocale] = useState<string>("");
+
+  useEffect(() => {
+    const cookieLocale = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("MYNEXTAPP_LOCALE="))
+      ?.split("=")[1];
+
+    if (cookieLocale) {
+      setLocale(cookieLocale);
+    } else {
+      const browserLocale = navigator.language.slice(0, 2);
+      setLocale(browserLocale);
+      document.cookie = `MYNEXTAPP_LOCALE=${browserLocale};`;
+    }
+  }, [router]);
+
+  const changeLocale = (newLocale: string) => {
+    setLocale(newLocale);
+    document.cookie = `MYNEXTAPP_LOCALE=${newLocale};`;
+    window.location.reload();
+  };
+
+  const t = useTranslations("HomePage");
+
   return (
     <main>
       <h1 className="heading">Citizen Dashboard</h1>
       <Toggle />
+      <div>
+        <button
+          onClick={() => changeLocale("en")}
+          className={`border p-2 font-bold rouunded-md text-sm ${
+            locale === "en" && "bg-white text-black"
+          }`}
+        >
+          EN
+        </button>
+        <button
+          onClick={() => changeLocale("np")}
+          className={`border p-2 font-bold rouunded-md text-sm ${
+            locale === "np" && "bg-white text-black"
+          }`}
+        >
+          NP
+        </button>
+      </div>
+
       <div className="container">
-        <p>Welcome Text</p>
-        <p>गुनासो सजिलै दर्ता र ट्र्याक गर्नुहोस्</p>
+        <p>{t("welcome")}</p>
+        <p>{t("description")}</p>
         <div>
           <Button className="btn" kind="primary">
             Submit Grivance
@@ -25,10 +72,11 @@ export default function Home() {
         <Tile className="box text-center font-semibold">
           500+ Gunaso submitted
         </Tile>
-        <Tile className="box text-centerfont-semibold">300+ Resolved</Tile>
+        <Tile className="box text-center font-semibold">300+ Resolved</Tile>
         <Tile className="box text-center font-semibold">100 Pending</Tile>
         <Tile className="box text-center font-semibold">20 Escalated</Tile>
       </div>
+
       <footer className="footer">
         <Link className="link" href="/">
           Home
