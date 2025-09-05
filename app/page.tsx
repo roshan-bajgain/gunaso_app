@@ -1,11 +1,13 @@
 "use client";
 import { Button, TextArea, TextInput, Tile } from "@carbon/react";
 import Link from "next/link";
+import Toggle from "@/components/toggle";
 
 export default function Home() {
   return (
     <main>
       <h1 className="heading">Citizen Dashboard</h1>
+      <Toggle />
       <div className="container">
         <p>Welcome Text</p>
         <p>गुनासो सजिलै दर्ता र ट्र्याक गर्नुहोस्</p>
