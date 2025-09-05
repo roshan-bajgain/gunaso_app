@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@use '@carbon/react/scss/reset';
-@use '@carbon/react/scss/theme';
-@use '@carbon/react/scss/themes' as themes with (
+@use "@carbon/react/scss/reset";
+@use "@carbon/react/scss/theme";
+@use "@carbon/react/scss/themes" as themes with (
   $theme: themes.$g10
 );
 
@@ -39,22 +39,39 @@ body {
 .btn {
   padding: 7px;
   margin: 5px;
-  background-color: #6D6868;
+  background-color: #6d6868;
   color: #000000;
   margin-bottom: 50px;
 }
-
+.btn1-container {
+  display: flex;
+  flex-direction: row-reverse;
+}
+.btn1 {
+  border: 1px solid #000;
+  padding: 6px 12px;
+  font-weight: bold;
+  border-radius: 6px;
+  font-size: 14px;
+  background: transparent;
+  cursor: pointer;
+  margin: 6px;
+}
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
 .box {
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   color: #000000;
-  border: 2px solid #D9D9D9;
+  border: 2px solid #d9d9d9;
   padding: 20px;
   border-radius: 8px;
   margin: 4px;
 }
 .container {
-  background-color: #D9D9D9;
-  border: 2px solid #D9D9D9;
+  background-color: #d9d9d9;
+  border: 2px solid #d9d9d9;
   max-width: 700px;
   margin: 0 auto;
   padding: 20px;
@@ -74,8 +91,8 @@ body {
   text-decoration: none;
   flex: 1;
   text-align: center;
-  background-color: #D9D9D9;
-  border: 2px solid #D9D9D9;
+  background-color: #d9d9d9;
+  border: 2px solid #d9d9d9;
   padding: 10px;
   margin: 4px;
 }
@@ -85,18 +102,15 @@ body {
   height: 100%;
 }
 
-
 html.light body {
   background: #ffffff;
   color: #0a0a0a;
 }
 
-
 html.dark body {
   background: #0b0b0b;
   color: #f5f5f5;
 }
-
 
 main {
   transition: background-color 0.25s ease, color 0.25s ease;

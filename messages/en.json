@@ -1,6 +1,8 @@
 {
   "HomePage": {
     "welcome": "Welcome to Gunaso",
-    "description": "Easily register and track complaints"
+    "description": "Easily register and track complaints",
+    "btn": "Submit Grievance",
+    "btn1": "Track Grievance"
   }
 }

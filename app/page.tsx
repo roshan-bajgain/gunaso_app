@@ -35,24 +35,16 @@ export default function Home() {
   return (
     <main>
       <h1 className="heading">Citizen Dashboard</h1>
-      <Toggle />
-      <div>
-        <button
-          onClick={() => changeLocale("en")}
-          className={`border p-2 font-bold rouunded-md text-sm ${
-            locale === "en" && "bg-white text-black"
-          }`}
-        >
-          EN
-        </button>
-        <button
-          onClick={() => changeLocale("np")}
-          className={`border p-2 font-bold rouunded-md text-sm ${
-            locale === "np" && "bg-white text-black"
-          }`}
-        >
-          NP
-        </button>
+      <div className="flex">
+        <Toggle />
+        <div className="btn1-container">
+          <button onClick={() => changeLocale("en")} className="btn1">
+            EN
+          </button>
+          <button onClick={() => changeLocale("np")} className="btn1">
+            NP
+          </button>
+        </div>
       </div>
 
       <div className="container">
@@ -60,10 +52,10 @@ export default function Home() {
         <p>{t("description")}</p>
         <div>
           <Button className="btn" kind="primary">
-            Submit Grivance
+            {t("btn")}
           </Button>
           <Button className="btn" kind="secondary">
-            My Grievance
+          {t("btn1")}
           </Button>
         </div>
       </div>
