@@ -1,103 +1,88 @@
-import Image from "next/image";
+"use client";
+import { Button, TextArea, TextInput, Tile } from "@carbon/react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import Toggle from "@/components/toggle";
+import { useTranslations } from "next-intl";
+import router from "next/router";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [locale, setLocale] = useState<string>("");
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    const cookieLocale = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("MYNEXTAPP_LOCALE="))
+      ?.split("=")[1];
+
+    if (cookieLocale) {
+      setLocale(cookieLocale);
+    } else {
+      const browserLocale = navigator.language.slice(0, 2);
+      setLocale(browserLocale);
+      document.cookie = `MYNEXTAPP_LOCALE=${browserLocale};`;
+    }
+  }, [router]);
+
+  const changeLocale = (newLocale: string) => {
+    setLocale(newLocale);
+    document.cookie = `MYNEXTAPP_LOCALE=${newLocale};`;
+    window.location.reload();
+  };
+
+  const t = useTranslations("HomePage");
+
+  return (
+    <main>
+      <h1 className="heading">Citizen Dashboard</h1>
+      <div className="flex">
+        <Toggle />
+        <div className="btn1-container">
+          <button onClick={() => changeLocale("en")} className="btn1">
+            EN
+          </button>
+          <button onClick={() => changeLocale("np")} className="btn1">
+            NP
+          </button>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </div>
+
+      <div className="container">
+        <p>{t("welcome")}</p>
+        <p>{t("description")}</p>
+        <div>
+          <Button className="btn" kind="primary">
+            {t("btn")}
+          </Button>
+          <Button className="btn" kind="secondary">
+          {t("btn1")}
+          </Button>
+        </div>
+      </div>
+
+      <div className="box-container grid grid-cols-4 gap-4">
+        <Tile className="box text-center font-semibold">
+          500+ Gunaso submitted
+        </Tile>
+        <Tile className="box text-center font-semibold">300+ Resolved</Tile>
+        <Tile className="box text-center font-semibold">100 Pending</Tile>
+        <Tile className="box text-center font-semibold">20 Escalated</Tile>
+      </div>
+
+      <footer className="footer">
+        <Link className="link" href="/">
+          Home
+        </Link>
+        <Link className="link" href="/my-grievances">
+          My Grievances
+        </Link>
+        <Link className="link" href="/submit-grievances">
+          Submit Grievances
+        </Link>
+        <Link className="link" href="/notifications">
+          Notification
+        </Link>
       </footer>
-    </div>
+    </main>
   );
 }
