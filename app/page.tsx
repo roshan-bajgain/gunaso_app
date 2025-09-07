@@ -5,6 +5,7 @@ import Link from "next/link";
 import Toggle from "@/components/toggle";
 import { useTranslations } from "next-intl";
 import router from "next/router";
+import { LoadingSpinner } from "./components/common/LoadingSpinner";
 
 export default function Home() {
   const [locale, setLocale] = useState<string>("");
@@ -44,6 +45,7 @@ export default function Home() {
           <button onClick={() => changeLocale("np")} className="btn1">
             NP
           </button>
+          <Button kind="primary">Submit</Button>
         </div>
       </div>
 
@@ -55,7 +57,7 @@ export default function Home() {
             {t("btn")}
           </Button>
           <Button className="btn" kind="secondary">
-          {t("btn1")}
+            {t("btn1")}
           </Button>
         </div>
       </div>
