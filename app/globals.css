@@ -8,6 +8,7 @@
   $theme: themes.$g10
 );
 
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -85,12 +86,14 @@ body {
 
 .box-container {
   position: relative;
-  top: 100px;
+  top:50px
+  
 }
 .footer {
   display: flex;
   position: absolute;
-  bottom: 200px;
+  bottom: 202px;
+  left: 30px;
 }
 .footer .link {
   color: #000000;
