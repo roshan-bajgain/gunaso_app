@@ -1,17 +1,7 @@
 "use client";
 
-
-import {
-  Button,
-  TextArea,
-  TextInput,
-  Select,
-  SelectItem,
-  DatePicker,
-  DatePickerInput,
-  FileUploader,
-} from "@carbon/react";
 import { useState } from "react";
+import Bottom from "../components/common/Button";
 
 export default function SubmitGrievance() {
   const [formData, setFormData] = useState({
@@ -25,137 +15,108 @@ export default function SubmitGrievance() {
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setFormData((prev) => ({ ...prev, category: e.target.value }));
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] || null;
-    setFormData((prev) => ({ ...prev, image: file }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Form Submitted:", formData);
-    // Later send to API route
-  };
-
-  const handleReset = () => {
-    setFormData({
-      category: "",
-      district: "",
-      address: "",
-      ward: "",
-      date: "",
-      description: "",
-      image: null,
-    });
-  };
-
   return (
-    <main className="p-6 max-w-3xl mx-auto">
-      <h1 className="text-2xl font-semibold mb-6">Submit Grievance</h1>
-      <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Category */}
-        <Select
-          id="category"
-          labelText="Category"
-          onChange={handleCategoryChange}
-          defaultValue=""
-          required
-        >
-          <SelectItem value="" text="Choose category" />
-          <SelectItem value="road" text="Road" />
-          <SelectItem value="transport" text="Transportation" />
-          <SelectItem value="water" text="Water" />
-          <SelectItem value="electricity" text="Electricity" />
-          <SelectItem value="health" text="Health" />
-        </Select>
+    <main className="pb-20 px-6 max-w-3xl mx-auto">
+      <h1 className="text-xl font-semibold mb-6">Submit Grievance</h1>
 
-        {/* Horizontal Row */}
-        <div className="grid grid-cols-2 gap-4">
-          <TextInput
-            id="district"
+      <form className="space-y-4">
+        <div>
+          <label className="block text-sm font-medium">Select Category</label>
+          <select
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            className="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          >
+            <option value="">Choose category</option>
+            <option value="road">Road</option>
+            <option value="water">Water</option>
+            <option value="transport">Transport</option>
+          </select>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <input
             name="district"
-            labelText="District"
-            placeholder="Enter district"
+            placeholder="District"
             value={formData.district}
             onChange={handleChange}
-            required
+            className="rounded-md border-gray-300 shadow-sm"
           />
-          <TextInput
-            id="address"
+          <input
             name="address"
-            labelText="Address"
-            placeholder="Enter address"
+            placeholder="Address"
             value={formData.address}
             onChange={handleChange}
-            required
+            className="rounded-md border-gray-300 shadow-sm"
           />
-          <TextInput
-            id="ward"
+          <input
             name="ward"
-            labelText="Ward Number"
-            type="number"
-            placeholder="Ward"
+            placeholder="Ward No"
             value={formData.ward}
             onChange={handleChange}
-            required
+            className="rounded-md border-gray-300 shadow-sm"
           />
-          <DatePicker
-            dateFormat="d/m/Y"
-            onChange={(dates) => {
-              setFormData((prev) => ({
-                ...prev,
-                date: dates[0]?.toISOString() || "",
-              }));
-            }}
-          >
-            <DatePickerInput
-              id="date"
-              placeholder="dd/mm/yyyy"
-              labelText="Date"
-              type="text"
-            />
-          </DatePicker>
+          <input
+            type="date"
+            name="date"
+            value={formData.date}
+            onChange={handleChange}
+            className="rounded-md border-gray-300 shadow-sm"
+          />
         </div>
 
-        {/* Description */}
-        <TextArea
-          id="description"
+        <textarea
           name="description"
-          labelText="Describe the issue"
-          placeholder="Enter details here"
+          placeholder="Describe Issue"
           value={formData.description}
           onChange={handleChange}
-          required
+          rows={4}
+          className="w-full rounded-md border-gray-300 shadow-sm"
         />
 
-        {/* File Upload */}
-        <FileUploader
-          buttonLabel="Add Image"
-          labelTitle="Upload Supporting Image (optional)"
-          labelDescription="Max file size 2MB, JPG/PNG only"
-          onChange={handleFileChange}
-          accept={[".jpg", ".jpeg", ".png"]}
-        />
+        <div>
+          <label className="block text-sm font-medium">
+            Add Images/Attachments (Optional)
+          </label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) =>
+              setFormData((prev) => ({
+                ...prev,
+                image: e.target.files?.[0] || null,
+              }))
+            }
+            className="mt-1 block w-full text-sm text-gray-600"
+          />
+        </div>
 
-        {/* Buttons */}
         <div className="flex gap-4">
-          <Button type="submit" kind="primary">
+          <button
+            type="submit"
+            className="px-6 py-2 bg-blue-600 text-white rounded-md"
+          >
             Submit
-          </Button>
-          <Button type="button" kind="secondary" onClick={handleReset}>
+          </button>
+          <button
+            type="reset"
+            className="px-6 py-2 bg-gray-200 text-gray-800 rounded-md"
+          >
             Reset
-          </Button>
+          </button>
         </div>
       </form>
+
+      <Bottom />
     </main>
   );
 }

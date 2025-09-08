@@ -45,7 +45,6 @@ export default function Home() {
           <button onClick={() => changeLocale("np")} className="btn1">
             NP
           </button>
-          <Button kind="primary">Submit</Button>
         </div>
       </div>
 
